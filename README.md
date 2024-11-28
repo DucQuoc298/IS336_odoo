@@ -39,3 +39,4 @@ To learn the software, we recommend the <a href="https://www.odoo.com/slides">Od
 # odoo-customization
 # odoo-customize
 # odoo-customize
+# IS336_odoo
