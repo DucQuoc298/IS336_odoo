@@ -20,6 +20,7 @@ status
 odoo/filestore
 # maintenance migration scripts
 odoo/addons/base/maintenance
+
 odoo.conf
 
 # generated for windows installer?
