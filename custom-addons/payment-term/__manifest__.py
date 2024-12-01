@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Real Estate Sales",
+    'name': "Real Estate",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -21,11 +21,20 @@ Long description of module's purpose
     'depends': ['base','account'],
 
     # always loaded
+    # 'data': [
+    #     "data/student_school_record.xml",
+    #     "security/ir.model.access.csv",
+    #     "views/student_view.xml",
+    #     "views/school_view.xml",
+    #     "views/hobby_view.xml",
+    # ]
     'data': [
-        "data/student_school_record.xml",
         "security/ir.model.access.csv",
-        "views/student_view.xml",
-        "views/school_view.xml",
-        "views/hobby_view.xml",
-    ]
+        "views/project_views.xml",
+        "views/building_views.xml",
+        "views/property_views.xml",
+        "views/property_status_views.xml",
+        "views/real_estate_menus.xml"
+    ],
+
 }
