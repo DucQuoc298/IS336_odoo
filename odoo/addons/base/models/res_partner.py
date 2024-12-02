@@ -255,6 +255,15 @@ class Partner(models.Model):
     active = fields.Boolean(default=True)
     employee = fields.Boolean(help="Check this box if this contact is an Employee.")
     function = fields.Char(string='Job Position')
+    contact_type = fields.Selection([
+        ('B', 'Bank'),
+        ('C', 'Customer'),
+        ('S', 'Supplier'),
+        ('T', 'Client'),
+        ('O', 'Owner'),
+        ('I', 'Site'),
+        ('V', 'Investor'),
+    ], string="Contact Type", required=True, default='C')
     type = fields.Selection(
         [('contact', 'Contact'),
          ('invoice', 'Invoice Address'),
@@ -1064,7 +1073,7 @@ class Partner(models.Model):
     def _get_all_addr(self):
         self.ensure_one()
         return [{
-            'contact_type': self.street,
+            'contact_type': self.contact_type,
             'street': self.street,
             'zip': self.zip,
             'city': self.city,
