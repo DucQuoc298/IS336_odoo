@@ -1,3 +1,5 @@
+from keras.src.utils import default
+
 from odoo import api, fields, models
 
 
@@ -5,25 +7,32 @@ class RealEstateProperty(models.Model):
     _name = 'real.estate.property'
     _description = 'Property'
 
-    # Fields
-    property_name = fields.Char(string="Property", required=True, help="Name of the real estate property")
-    status_code = fields.Many2one(
+    property = fields.Char('Property Code', required=True)
+    property_name = fields.Char(string="Property", required=True, help="Name of the real estate property", default="")
+    status_code = fields.Char(
+        string="Status Code",
+        required=True,
+        help="The project associated with this building"
+    )
+    status_id = fields.Many2one(
         comodel_name='real.estate.property.status',
         string="Status",
-        ondelete='set null',
-        help="Current status of the property"
+        compute='_compute_status',
+        store=True
     )
+    description = fields.Char(string="Description", help="Description of the property")
     property_type = fields.Selection([
         ('apartment', 'Apartment'),
         ('land', 'Land'),
         ('villa', 'Villa'),
         ('commercial', 'Commercial'),
-    ], string="Property Type", required=True, help="Type of the property")
-    block = fields.Char(string="Block", help="Block associated with the property")
-    building_code = fields.Many2one(
+    ], string="Property Type",default='apartment', help="Type of the property")
+    building_code = fields.Char(string="Building Code", help="Building associated with the property")
+    building_id = fields.Many2one(
         comodel_name='real.estate.building',
-        string="Building / Land Area",
-        help="The building or land area where the property is located"
+        string="Building",
+        compute='_compute_building',
+        store=True
     )
     total_area = fields.Float(string="Total Area (m²)", help="Total area of the property in square meters")
     property_value = fields.Float(string="Property Value", help="Total value of the property")
@@ -40,6 +49,24 @@ class RealEstateProperty(models.Model):
         ('mountain', 'Mountain View')
     ], string="View", help="View type of the property")
 
+    @api.depends('status_code')
+    def _compute_status(self):
+        for record in self:
+            if record.status_code:
+                status = self.env['real.estate.property.status'].search([('status_code', '=', record.status_code)], limit=1)
+                if status:
+                    record.status_id = status.id
+                else:
+                    record.status_id = False
+    @api.depends('building_code')
+    def _compute_building(self):
+        for record in self:
+            if record.building_code:
+                building = self.env['real.estate.building'].search([('building_code', '=', record.building_code)], limit=1)
+                if building:
+                    record.building_id = building.id
+                else:
+                    record.building_id = False
     @api.model
     def default_get(self, fields_list):
         """Set default values for fields"""
@@ -54,14 +81,6 @@ class RealEstateProperty(models.Model):
         #     else:
         #         raise ValueError("Only available properties can be reserved.")
         pass
-
-    def sell_property(self):
-        """Sell the property by setting its status to 'sold'."""
-        for record in self:
-            if record.status in ['available', 'reserved']:
-                record.status = 'sold'
-            else:
-                raise ValueError("Only available or reserved properties can be sold.")
 
     def compute_vat_prices(self):
         """Calculate VAT-inclusive and VAT-taxable values."""

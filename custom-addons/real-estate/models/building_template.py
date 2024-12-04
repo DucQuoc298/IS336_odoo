@@ -1,57 +1,55 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class RealEstateBuilding(models.Model):
     _name = 'real.estate.building'
     _description = 'Building'
 
-    building_code = fields.Char(string="Block", required=True)  # Block Name/Code
-    name = fields.Char(string="Building Name", required=True)  # Building Name
+    building_code = fields.Char(string="Building", required=True)
+    name = fields.Char(string="Name", required=True)
     status = fields.Selection([
-        ('planned', 'Planned'),
-        ('under_construction', 'Under Construction'),
-        ('completed', 'Completed'),
-        ('occupied', 'Occupied'),
-    ], string="Status", default='planned')  # Current Building Status
+        ('W', 'Working'),
+        ('C', 'Closed')
+    ], string="Status", default='W')
     project_code = fields.Many2one(
-        comodel_name='real.estate.project',
-        string="Project",
+        'real.estate.project',
+        string="Project Code",
         required=True,
         help="The project associated with this building"
-    )  # Related Project
-    apartment_area = fields.Float(string="Apartment Area (m²)", help="Total apartment area in square meters")  # Apartment Area
-    commercial_area = fields.Float(string="Commercial Area (m²)", help="Total commercial area in square meters")  # Commercial Area
+    )
+    project_id = fields.Many2one(
+        'real.estate.project',
+         string="Project",
+         # compute="_compute_project",
+         store=True
+    )
+    address = fields.Char(string="Address")
+    apartment_area = fields.Float(string="Apartment Area (m²)", help="Total apartment area in square meters")
+    commercial_area = fields.Float(string="Commercial Area (m²)", help="Total commercial area in square meters")
 
-    # Optional fields for further details
     total_units = fields.Integer(string="Total Units", help="Number of units in the building")
     description = fields.Text(string="Description", help="Additional notes or description for the building")
 
+    # @api.depends('project_code')
+    # def _compute_project(self):
+    #     for record in self:
+    #         if record.project_code:
+    #             # Tìm kiếm dự án dựa trên project_code
+    #             project = self.env['real.estate.project'].search([('project_code', '=', record.project_code)], limit=1)
+    #             if project:
+    #                 record.project_id = project.id
+    #             else:
+    #                 record.project_id = False
     @api.model
+    def create(self, vals):
+        if 'project_code' in vals and not isinstance(vals['project_code'], int):
+            project = self.env['real.estate.project'].search([('project_code', '=', vals['project_code'])], limit=1)
+            if not project:
+                raise ValidationError(_("Project with code '%s' does not exist." % vals['project_code']))
+            vals['project_code'] = project.id
+        return super(RealEstateBuilding, self).create(vals)
     def default_get(self, fields_list):
-        """Override default_get to set custom default values."""
-        rtn = super(RealEstateBuilding, self).default_get(fields_list)
-        rtn['block'] = "Default Block"
-        rtn['status'] = 'planned'
-        return rtn
-
-    def archive_building(self):
-        """Archive the building by updating its status to 'completed'."""
-        for record in self:
-            record.status = 'completed'
-
-    def duplicate_building(self):
-        """Duplicate the building with a slightly modified name."""
-        for record in self:
-            record.copy({'name': f"{record.name} (Copy)"})
-
-    def unlink_building(self):
-        """Delete the building records."""
-        for record in self:
-            record.unlink()
-
-    def print_building_summary(self):
-        """Print a summary of the building records."""
-        print(f"Total Buildings: {len(self)}")
-        print("Block      Name        Status            Project            Apartment Area (m²)    Commercial Area (m²)")
-        for record in self:
-            print(f"{record.building_code}      {record.name}      {record.status}      {record.project_code.name}      {record.apartment_area}      {record.commercial_area}")
+        """Set default values for fields"""
+        defaults = super(RealEstateBuilding, self).default_get(fields_list)
+        return defaults

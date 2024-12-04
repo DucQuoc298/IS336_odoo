@@ -25,11 +25,6 @@
         <field name="model">real.estate.project</field>
         <field name="arch" type="xml">
             <form string="Project">
-<!--                <header>-->
-<!--                    <button name="archive_project" type="object" string="Archive Project"/>-->
-<!--                    <button name="duplicate_project" type="object" string="Duplicate Project"/>-->
-<!--                    <button name="delete_project" type="object" string="Delete Project"/>-->
-<!--                </header>-->
                 <sheet>
                     <group>
                         <field name="project_code" string="Project Code" placeholder="Enter Project Code"/>

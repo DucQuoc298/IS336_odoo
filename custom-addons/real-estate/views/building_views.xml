@@ -15,26 +15,19 @@
             </list>
         </field>
     </record>
-
-    <!-- Form View -->
     <record id="real_estate_building_form_view" model="ir.ui.view">
         <field name="name">real.estate.building.form.view</field>
         <field name="model">real.estate.building</field>
         <field name="arch" type="xml">
             <form string="Building">
-                <header>
-                    <button name="archive_building" type="object" string="Archive" class="btn-primary"
-                            odoo.condition="status != 'completed'"/>
-                    <button name="duplicate_building" type="object" string="Duplicate" class="btn-secondary"/>
-                    <button name="unlink_building" type="object" string="Delete" class="btn-danger"/>
-                </header>
                 <sheet>
                     <group>
                         <group>
                             <field name="building_code" required="1"/>
                             <field name="name" required="1"/>
-                            <field name="status" readonly="1"/>
-                            <field name="project_code" required="1"/>
+                            <field name="status" />
+                            <field name="project_code" required="1" />
+                            <field name="address"/>
                         </group>
                         <group>
                             <field name="total_units"/>
