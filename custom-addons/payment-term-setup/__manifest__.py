@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Real Estate",
+    'name': "Payment Term Setup",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -30,11 +30,8 @@ Long description of module's purpose
     # ]
     'data': [
         "security/ir.model.access.csv",
-        "views/project_views.xml",
-        "views/building_views.xml",
-        "views/property_views.xml",
-        "views/property_status_views.xml",
-        "views/real_estate_menus.xml"
+        "views/payment_term_views.xml",
+        "views/payment_term_menus.xml"
     ],
 
 }

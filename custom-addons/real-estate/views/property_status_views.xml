@@ -10,7 +10,7 @@
                 <field name="is_available"/>
                 <field name="manages_residents"/>
                 <field name="is_rentable"/>
-                <field name="property_id"/>
+<!--                <field name="property_id"/>-->
             </list>
         </field>
     </record>
@@ -42,11 +42,4 @@
         <field name="res_model">real.estate.property.status</field>
         <field name="view_mode">list,form</field>
     </record>
-
-    <!-- Menu -->
-<!--    <menuitem id="real_estate_property_status_menu"-->
-<!--              name="Property Statuses"-->
-<!--              parent="real_estate_root_menu"-->
-<!--              action="real_estate_property_status_action"-->
-<!--              sequence="20"/>-->
 </odoo>

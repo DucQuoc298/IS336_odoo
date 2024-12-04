@@ -10,14 +10,14 @@ class RealEstatePropertyStatus(models.Model):
     is_available = fields.Boolean(string="Is Available?", default=False, help="Indicates if the property is available")
     manages_residents = fields.Boolean(string="Manages Residents?", default=False, help="Indicates if it involves resident management")
     is_rentable = fields.Boolean(string="Is Rentable?", default=False, help="Indicates if the property is available for rent")
-
+    member_ids = fields.One2many('real.estate.property', 'status_code', string='Members', readonly=True)
     # Relations with Property Model
-    property_id = fields.Many2one(
-        comodel_name='real.estate.property',
-        string="Property",
-        ondelete='cascade',
-        help="The property associated with this status"
-    )
+    # property_id = fields.Many2one(
+    #     comodel_name='real.estate.property',
+    #     string="Property",
+    #     ondelete='cascade',
+    #     help="The property associated with this status"
+    # )
 
     @api.model
     def create(self, vals):

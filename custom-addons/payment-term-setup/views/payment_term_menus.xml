@@ -1,0 +1,15 @@
+<odoo>
+
+    <!-- Root Menu for Payment Terms -->
+    <menuitem id="payment_terms_root_menu"
+              name="Payment Terms Setup">
+
+        <!-- Payment Terms Submenu -->
+        <menuitem id="payment_term_definition_menu"
+                  name="Payment Term Definition"
+                  action="real_estate_payment_term_detail_action"/>
+
+
+    </menuitem>
+
+</odoo>

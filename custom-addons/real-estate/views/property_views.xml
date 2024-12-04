@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <list string="Properties">
                 <field name="property_name"/>
-                <field name="status_code"/>
+                <field name="status_code" widget="many2one"/>
                 <field name="property_type"/>
                 <field name="block"/>
                 <field name="building_code"/>
@@ -25,16 +25,16 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <header>
-                    <button name="reserve_property" type="object" string="Reserve" class="btn-primary"
-                            odoo.condition="status_code != 'available'"/>
-                    <button name="sell_property" type="object" string="Sell" class="btn-success"
-                            odoo.condition="status_code not in ['available', 'reserved']"/>
-                    <button name="compute_vat_prices" type="object" string="Compute VAT Prices"/>
+<!--                    <button name="reserve_property" type="object" string="Reserve" class="btn-primary"-->
+<!--                            odoo.condition="status_code != 'available'"/>-->
+<!--                    <button name="sell_property" type="object" string="Sell" class="btn-success"-->
+<!--                            odoo.condition="status_code not in ['available', 'reserved']"/>-->
+<!--                    <button name="compute_vat_prices" type="object" string="Compute VAT Prices"/>-->
                 </header>
                 <sheet>
                     <group>
                         <field name="property_name" required="1"/>
-                        <field name="status_code" readonly="1"/>
+                        <field name="status_code"/>
                         <field name="property_type" required="1"/>
                         <field name="block"/>
                         <field name="building_code"/>
@@ -47,8 +47,8 @@
                     </group>
                     <group string="Price Information">
                         <field name="unit_price_excl_vat"/>
-                        <field name="unit_price_incl_vat" readonly="1"/>
-                        <field name="vat_taxable_value" readonly="1"/>
+                        <field name="unit_price_incl_vat"/>
+                        <field name="vat_taxable_value"/>
                         <field name="land_use_right_value"/>
                     </group>
                 </sheet>
