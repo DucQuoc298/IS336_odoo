@@ -27,12 +27,16 @@
                       name="Property List"
                       action="real_estate_property_action"/>
         </menuitem>
-        <!-- Property Status Definition Submenu -->
-        <menuitem id="real_estate_property_statuses_menu"
-                  name="Property Statuses">
-            <menuitem id="real_estate_property_status_list_menu"
-                      name="Property Status Definition"
-                      action="real_estate_property_status_action"/>
+        <menuitem id="menu_real_estate_config"
+            name="Configuration"
+            sequence="50">
+            <menuitem id="menu_property_config"
+                sequence="30"
+                name="Property">
+                <menuitem id="menu_real_estate_property_statuses_config"
+                          name="Property Statuses"
+                          action="real_estate_property_status_action"/>
+            </menuitem>
         </menuitem>
     </menuitem>
 
