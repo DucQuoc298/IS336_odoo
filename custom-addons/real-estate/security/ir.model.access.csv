@@ -3,3 +3,4 @@ access_real_estate_project,real.estate.project,model_real_estate_project,base.gr
 access_real_estate_building,real.estate.building,model_real_estate_building,base.group_user,1,1,1,1
 access_real_estate_property,real.estate.property,model_real_estate_property,base.group_user,1,1,1,1
 access_real_estate_property_status,real.estate.property.status,model_real_estate_property_status,base.group_user,1,1,1,1
+access_real_estate_pricebook,real.estate.pricebook,model_real_estate_pricebook,base.group_user,1,1,1,1

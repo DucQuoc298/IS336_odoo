@@ -1,7 +1,4 @@
 import base64
-
-from keras.src.utils import default
-
 from odoo import api, fields, models, tools
 from odoo.fields import Properties
 

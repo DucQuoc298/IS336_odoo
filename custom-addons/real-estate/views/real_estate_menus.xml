@@ -36,7 +36,11 @@
                 <menuitem id="menu_real_estate_property_statuses_config"
                           name="Property Statuses"
                           action="real_estate_property_status_action"/>
+                <menuitem id="menu_real_estate_pricebook_config"
+                          name="Pricebook"
+                          action="real_estate_pricebook_action"/>
             </menuitem>
+
         </menuitem>
     </menuitem>
 
