@@ -31,12 +31,12 @@ class RealEstateBuilding(models.Model):
     total_units = fields.Integer(string="Total Units", help="Number of units in the building")
     description = fields.Text(string="Description", help="Additional notes or description for the building")
 
-    # @api.depends('project_code')
+    # @api.depends('project_code'
     # def _compute_project(self):
     #     for record in self:
     #         if record.project_code:
     #             # Tìm kiếm dự án dựa trên project_code
-    #             project = self.env['real.estate.project'].search([('project_code', '=', record.project_code)], limit=1)
+    #            project = self.env['real.estate.project'].search([('project_code', '=', record.project_code)], limit=1)
     #             if project:
     #                 record.project_id = project.id
     #             else:

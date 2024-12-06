@@ -8,7 +8,7 @@
         <menuitem id="real_estate_projects_menu"
                   name="Projects">
             <menuitem id="real_estate_project_list_menu"
-                      name="Project List"
+                      name="Project"
                       action="real_estate_project_action"/>
         </menuitem>
 
@@ -16,7 +16,7 @@
         <menuitem id="real_estate_buildings_menu"
                   name="Buildings">
             <menuitem id="real_estate_building_list_menu"
-                      name="Building List"
+                      name="Building"
                       action="real_estate_building_action"/>
         </menuitem>
 
@@ -24,7 +24,7 @@
         <menuitem id="real_estate_properties_menu"
                   name="Properties">
             <menuitem id="real_estate_property_list_menu"
-                      name="Property List"
+                      name="Property"
                       action="real_estate_property_action"/>
         </menuitem>
         <menuitem id="menu_real_estate_config"
@@ -34,7 +34,7 @@
                 sequence="30"
                 name="Property">
                 <menuitem id="menu_real_estate_property_statuses_config"
-                          name="Property Statuses"
+                          name="Property Status"
                           action="real_estate_property_status_action"/>
                 <menuitem id="menu_real_estate_pricebook_config"
                           name="Pricebook"

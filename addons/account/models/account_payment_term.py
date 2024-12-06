@@ -28,7 +28,7 @@ class AccountPaymentTerm(models.Model):
     fiscal_country_codes = fields.Char(compute='_compute_fiscal_country_codes')
     sequence = fields.Integer(required=True, default=10)
     currency_id = fields.Many2one('res.currency', compute="_compute_currency_id")
-
+    payment_term_code = fields.Char(string='Payment Term Code')
     display_on_invoice = fields.Boolean(string='Show installment dates', default=True)
     example_amount = fields.Monetary(currency_field='currency_id', default=1000, store=False, readonly=True)
     example_date = fields.Date(string='Date example', default=_default_example_date, store=False)
