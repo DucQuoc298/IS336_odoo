@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_real_estate_contract_type,real.estate.contract.type,model_real_estate_contract_type,base.group_user,1,1,1,1
+access_real_estate_contract_status,real.estate.contract.status,model_real_estate_contract_status,base.group_user,1,1,1,1
+access_real_estate_contract,real.estate.contract,model_real_estate_contract,base.group_user,1,1,1,1

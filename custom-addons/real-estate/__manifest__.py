@@ -16,18 +16,11 @@ Long description of module's purpose
     # for the full list
     'category': 'Uncategorized',
     'version': '0.1',
-
+    'license': 'LGPL-3',
     # any module necessary for this one to work correctly
     'depends': ['base','account'],
 
     # always loaded
-    # 'data': [
-    #     "data/student_school_record.xml",
-    #     "security/ir.model.access.csv",
-    #     "views/student_view.xml",
-    #     "views/school_view.xml",
-    #     "views/hobby_view.xml",
-    # ]
     'data': [
         "security/ir.model.access.csv",
         "views/project_views.xml",

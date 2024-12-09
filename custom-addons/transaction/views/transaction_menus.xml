@@ -1,0 +1,37 @@
+<odoo>
+
+    <menuitem id="transaction_root_menu"
+              name="Transactions"
+              sequence="20">
+        <menuitem id="transaction_menu"
+                  name="Transaction"
+                  sequence="1"
+        />
+         <menuitem id="contract_menu"
+                   name="Contract"
+                   sequence="2"
+                   action="real_estate_contract_action"
+         />
+        <menuitem id="menu_real_estate_transaction_config"
+            name="Configuration"
+            sequence="3">
+            <menuitem id="menu_contract_config"
+                sequence="1"
+                name="Contracts">
+                <menuitem id="menu_real_estate_contract_type_config"
+                          name="Contract Type"
+                          sequence="1"
+                          action="real_estate_transaction_contract_type_action"/>
+            </menuitem>
+            <menuitem id="menu_transaction_config"
+                sequence="2"
+                name="Transaction">
+                <menuitem id="menu_real_estate_transaction_status_config"
+                          name="Transaction Status"
+                          sequence="1"
+                          action="real_estate_transaction_status_action"/>
+            </menuitem>
+        </menuitem>
+    </menuitem>
+
+</odoo>

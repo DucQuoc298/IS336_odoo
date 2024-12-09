@@ -6,7 +6,7 @@
 
         <!-- Projects Submenu -->
         <menuitem id="real_estate_projects_menu"
-                  name="Projects">
+                  name="Project">
             <menuitem id="real_estate_project_list_menu"
                       name="Project"
                       action="real_estate_project_action"/>
@@ -14,7 +14,7 @@
 
         <!-- Buildings Submenu -->
         <menuitem id="real_estate_buildings_menu"
-                  name="Buildings">
+                  name="Building">
             <menuitem id="real_estate_building_list_menu"
                       name="Building"
                       action="real_estate_building_action"/>
@@ -22,7 +22,7 @@
 
         <!-- Properties Submenu -->
         <menuitem id="real_estate_properties_menu"
-                  name="Properties">
+                  name="Property">
             <menuitem id="real_estate_property_list_menu"
                       name="Property"
                       action="real_estate_property_action"/>

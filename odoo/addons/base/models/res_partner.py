@@ -233,7 +233,6 @@ class Partner(models.Model):
                           help="When printing documents and exporting/importing data, time values are computed according to this timezone.\n"
                                "If the timezone is not set, UTC (Coordinated Universal Time) is used.\n"
                                "Anywhere else, time values are computed according to the time offset of your web client.")
-
     tz_offset = fields.Char(compute='_compute_tz_offset', string='Timezone offset')
     user_id: ResUsers = fields.Many2one(
         'res.users', string='Salesperson',
@@ -264,6 +263,7 @@ class Partner(models.Model):
         ('I', 'Site'),
         ('V', 'Investor'),
     ], string="Contact Type", required=True, default='C')
+    contact_code = fields.Char(string='Contact code', required=True)
     type = fields.Selection(
         [('contact', 'Contact'),
          ('invoice', 'Invoice Address'),

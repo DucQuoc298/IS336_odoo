@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Payment Term Setup",
+    'name': "Transactions",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
     'description': """
 Long description of module's purpose
     """,
-
+    'license': 'LGPL-3',
     'author': "My Company",
     'website': "https://www.yourcompany.com",
 
@@ -20,18 +20,12 @@ Long description of module's purpose
     # any module necessary for this one to work correctly
     'depends': ['base','account'],
 
-    # always loaded
-    # 'data': [
-    #     "data/student_school_record.xml",
-    #     "security/ir.model.access.csv",
-    #     "views/student_view.xml",
-    #     "views/school_view.xml",
-    #     "views/hobby_view.xml",
-    # ]
     'data': [
         "security/ir.model.access.csv",
-        "views/payment_term_views.xml",
-        "views/payment_term_menus.xml"
+        "views/contract_type_views.xml",
+        "views/contract_status_views.xml",
+        "views/contract_views.xml",
+        "views/transaction_menus.xml"
     ],
 
 }

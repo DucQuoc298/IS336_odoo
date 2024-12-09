@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_transaction_status_list" model="ir.ui.view">
+        <field name="name">real.estate.contract.status.list</field>
+        <field name="model">real.estate.contract.status</field>
+        <field name="arch" type="xml">
+             <list string="Transaction Status">
+                <field name="contract_status_code"/>
+                <field name="name"/>
+                <field name="property_status_id"/>
+                <field name="status"/>
+                <field name="note"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_transaction_status_form" model="ir.ui.view">
+        <field name="name">real.estate.contract.status.form</field>
+        <field name="model">real.estate.contract.status</field>
+        <field name="arch" type="xml">
+            <form string="Transaction Status">
+                <sheet>
+                    <group>
+                        <field name="contract_status_code"/>
+                        <field name="name"/>
+                        <field name="property_status_id"/>
+                        <field name="status"/>
+                        <field name="note"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+     <record id="real_estate_transaction_status_action" model="ir.actions.act_window">
+        <field name="name">Transaction Status</field>
+        <field name="res_model">real.estate.contract.status</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
