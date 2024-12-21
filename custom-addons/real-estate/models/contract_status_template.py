@@ -5,22 +5,22 @@ class RealEstateContractStatus(models.Model):
     _name = 'real.estate.contract.status'
     _description = 'Real Estate Contract Status'
 
-    name = fields.Char(string="Tên trạng thái", required=True)
-    contract_status_code = fields.Char(string="Mã trạng thái", required=True)
-    description = fields.Text(string="Mô tả")
-    property_status_code = fields.Char(string="Mã trạng thái tài sản")
+    name = fields.Char(string="Contract Status Name", required=True)
+    contract_status_code = fields.Char(string="Contract Status Code", required=True)
+    description = fields.Text(string="Description")
+    property_status_code = fields.Char(string="Property Status Code")
     property_status_id = fields.Many2one(
         comodel_name='real.estate.property.status',
-        string="Trạng thái tài sản",
+        string="Property Status",
         compute='_compute_property_status',
         inverse="_inverse_property_status",
         store=True
     )
     status = fields.Selection([
-        ('C', 'Đã đóng'),
-        ('W', 'Đang hoạt động'),
+        ('C', 'Closed'),
+        ('W', 'Working'),
     ], string="Status", required=True, default='W', help="Status of the contract type")
-    note = fields.Text(string="Ghi chú")
+    note = fields.Text(string="Note")
 
     @api.model
     def default_get(self, fields_list):

@@ -172,6 +172,19 @@ class AccountMove(models.Model):
         check_company=True,
         domain="[('id', 'in', suitable_journal_ids)]",
     )
+    booking_ids = fields.Many2many(
+        comodel_name='real.estate.order',
+        string="Orders",
+        relation='real_estate_order_invoice_rel',
+        column1='invoice_id',
+        column2='order_id',
+        copy=False
+    )
+    contract_id = fields.Many2one(
+        comodel_name='real.estate.contract',
+        string="Contract",
+        copy=False
+    )
     journal_group_id = fields.Many2one(
         'account.journal.group',
         string='Ledger',

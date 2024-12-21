@@ -2,11 +2,11 @@ from odoo import api, fields, models
 
 class RealEstatePropertyStatus(models.Model):
     _name = 'real.estate.property.status'
-    _description = 'Property Status'
+    _description = 'Trạng thái tài sản'
 
     # Fields
-    status_code = fields.Char(string="Code", required=True, help="Unique code for the status")
-    name = fields.Char(string="Name", required=True, help="Name of the status")
+    status_code = fields.Char(string="Mã trạng thái", required=True, help="Unique code for the status")
+    name = fields.Char(string="Tên", required=True, help="Name of the status")
     is_available = fields.Boolean(string="Is Available?", default=False, help="Indicates if the property is available")
     manages_residents = fields.Boolean(string="Manages Residents?", default=False, help="Indicates if it involves resident management")
     is_rentable = fields.Boolean(string="Is Rentable?", default=False, help="Indicates if the property is available for rent")

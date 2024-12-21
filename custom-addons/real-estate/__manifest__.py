@@ -28,6 +28,7 @@ Long description of module's purpose
         "views/property_views.xml",
         "views/pricebook_views.xml",
         "views/property_status_views.xml",
+        "views/order_views.xml",
         "views/real_estate_menus.xml"
     ],
 

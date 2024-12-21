@@ -1,0 +1,151 @@
+<odoo>
+    <record id="real_estate_order" model="ir.ui.view">
+        <field name="name">real.estate.order.list</field>
+        <field name="model">real.estate.order</field>
+        <field name="arch" type="xml">
+           <list string="Giữ chỗ" sample="1" multi_edit="1">
+                <field name="order_code" string="Tên"/>
+                <field name="status" optional="show"/>
+                <field name="booking_date" optional="show"/>
+                <field name="project_id" optional="show"/>
+                <field name="building_id" optional="show"/>
+                <field name="property_id" optional="show"/>
+                <field name="client_id" optional="show"/>
+                <field name="employee_id" optional="hide" readonly="1"/>
+                <field name="booking_priority" optional="show" readonly="1"/>
+                <field name="payment_term_id" optional="hide" readonly="1"/>
+                <field name="property_value" optional="show" readonly="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="real_estate_booking_form" model="ir.ui.view">
+        <field name="name">real.estate.order.form</field>
+        <field name="model">real.estate.order</field>
+        <field name="arch" type="xml">
+            <form string="Giữ chỗ">
+                <header>
+                    <button id="create_booking_invoice" name="action_create_booking_contract" string="Tạo giao dịch đặt chỗ"
+                        type="object" class="btn-primary" data-hotkey="q"
+                        invisible="status != 'DCH'"/>
+                    <button name="action_booking_confirm" id="action_booking_confirm" data-hotkey="q"
+                        string="Xác nhận" class="btn-primary" type="object" context="{'validate_analytic': True}"
+                        invisible="status != 'CDDCH'"/>
+                     <button name="action_deposit" data-hotkey="q"
+                        string="Đặt cọc" type="object" context="{'validate_analytic': True}"
+                        invisible="status != 'DCH'"/>
+                    <button name="action_deposit_confirm" data-hotkey="q" class="btn-primary"
+                        string="Xác nhận" type="object" context="{'validate_analytic': True}"
+                        invisible="status != 'CDDCO'"/>
+                    <button id="create_deposit_contract" name="action_create_deposit_contract" string="Tạo giao dịch đặt cọc"
+                        type="object" class="btn-primary" data-hotkey="q"
+                        invisible="status != 'DCO'"/>
+                    <button id="create_contract" name="action_liquidation_deposit_contract" string="Hợp đồng giữ chỗ đặt cọc"
+                        type="object" data-hotkey="q"
+                        invisible="status != 'DCO'"/>
+                    <button name="action_cancel" data-hotkey="q"
+                        string="Huỷ" type="object" context="{'validate_analytic': True}"/>
+                     <field name="status" widget="statusbar" statusbar_visible="CDDCH,DCH, CDDCO, DCO, HDC"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_contract"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            invisible="contract_count == 0">
+                            <field name="contract_count" widget="statinfo" string="Hợp đồng"/>
+                        </button>
+                    </div>
+                     <div class="oe_title">
+                         <label for="order_code" string="Giữ chỗ"/>
+                         <h1>
+                            <field name="order_code" options="{'line_breaks': False}" widget="text" class="text-break" default_focus="1" placeholder="e.g. CH 001" required="true"/>
+                         </h1>
+                     </div>
+                    <group>
+                        <group>
+<!--                            <field name="transaction_status_id" readonly="1"/>-->
+                            <field name="property_status_id" readonly="1"/>
+                            <field name="booking_date" readonly="1"/>
+                            <field name="project_id" required="1"/>
+                            <field name="building_id" required="1" />
+                            <field name="property_id" required="1" domain="[('status_id', '=', 16), ('building_id', '=', building_id)]"/>
+
+                        </group>
+                        <group>
+                            <field name="booking_priority" invisible="not booking_priority"/>
+                            <field name="order_value"/>
+                            <field name="property_value" readonly="1"/>
+                            <field name="client_id" required="1"/>
+                            <field name="employee_id"/>
+                            <field name="payment_term_id"/>
+                            <field name="cancel_date" invisible="not cancel_date"/>
+                        </group>
+                    </group>
+                    <group string="Thông tin ổ sung">
+                        <field name="description" placeholder="Enter building description..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+
+    </record>
+
+    <record id="view_search_booking" model="ir.ui.view">
+        <field name="name">real.estate.order.list.select</field>
+        <field name="model">real.estate.order</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search Real Estate Order">
+                <filter string="Giữ chỗ" domain="[('status', 'in', ['DCH', 'CDDCH'])]" name="status_filter"/>
+            </search>
+        </field>
+    </record>
+    <record id="view_search_deposit" model="ir.ui.view">
+        <field name="name">real.estate.order.list.select</field>
+        <field name="model">real.estate.order</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search Real Estate Order">
+                <field name="property_status_id"/>
+                <filter string="Đặt cọc" domain="[('status', 'in', ['DCO', 'CDDCO', 'HDC'])]" name="status_filter"/>
+            </search>
+        </field>
+    </record>
+<!--    <record id="order_view_search_inherit_booking" model="ir.ui.view">-->
+<!--        <field name="name">order.search.inherit.booking</field>-->
+<!--        <field name="model">real.estate.order</field>-->
+<!--        <field name="mode">primary</field>-->
+<!--        <field name="inherit_id" ref="view_search_order"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <filter name="my_sale_orders_filter" position="replace">-->
+<!--                <field name="campaign_id"/>-->
+<!--                <separator/>-->
+<!--                <filter string="My Quotations" name="my_quotation" domain="[('user_id', '=', uid)]"/>-->
+<!--                <separator/>-->
+<!--                <filter string="Quotations" name="draft" domain="[('state', 'in', ('draft', 'sent'))]"/>-->
+<!--                <filter string="Sales Orders" name="sales" domain="[('state', '=', 'sale')]"/>-->
+<!--                <separator/>-->
+<!--            </filter>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!-- Action -->
+    <record id="real_estate_booking_action" model="ir.actions.act_window">
+        <field name="name">Giữ chỗ</field>
+        <field name="res_model">real.estate.order</field>
+        <field name="view_mode">list,form</field>
+         <field name="search_view_id" ref="view_search_booking"/>
+        <field name="context">{'search_default_status_filter': 1}</field>
+    </record>
+
+    <record id="real_estate_deposit_action" model="ir.actions.act_window">
+        <field name="name">Đặt cọc</field>
+        <field name="res_model">real.estate.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_search_deposit"/>
+        <field name="context">{'search_default_status_filter': 1}</field>
+    </record>
+
+</odoo>

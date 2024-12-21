@@ -11,25 +11,25 @@ class RealEstateProject(models.Model):
     _name = 'real.estate.project'
     _description = 'Project'
 
-    project_code = fields.Char(string="Project", required=True)
-    name = fields.Char(string="Name", required=True)
+    project_code = fields.Char(string="Dự án", required=True)
+    name = fields.Char(string="Tên", required=True)
     status = fields.Selection([
-        ('C', 'Closed'),
-        ('W', 'Working')
+        ('C', 'Đã đóng'),
+        ('W', 'Đang hoạt động')
     ], string="Status", default='W')
     project_type = fields.Selection([
-        ('DTMG', 'Brokerage investment project'),
-        ('DTTC', 'Subsidiary investment project'),
-        ('DTTT', 'Direct investment project'),
-        ('MGTH', 'Brokerage project (no payment collection)'),
-    ], string="Project Type", required=True, default='DTMG')
-    deposit_value = fields.Float(string="Deposit Value")  # Deposit Value
-    estimated_handover_date = fields.Date(string="Expected Delivery Month", default=date(1991, 1, 1))
-    apartment_area = fields.Float(string="Area (m²)")
+        ('DTMG', 'Dự án đầu tư môi giới'),
+        ('DTTC', 'Dự án đầu tư công ty con'),
+        ('DTTT', 'Dự án trực tiếp đầu tư'),
+        ('MGTH', 'Dự án môi giới (Không thu đợt thanh toán)'),
+    ], string="Loại dự án", required=True, default='DTMG')
+    value = fields.Float(string="Giá trị dự án")
+    estimated_handover_date = fields.Date(string="Ngày bàn giao", default=date(1991, 1, 1))
+    apartment_area = fields.Float(string="Diện tích (m²)")
 
-    total_units = fields.Integer(string="Total Units")
-    location = fields.Char(string="Location")
-    description = fields.Text(string="Description")
+    total_units = fields.Integer(string="Số lượng sản phẩm")
+    location = fields.Char(string="Địa chỉ")
+    description = fields.Text(string="Mô tả")
 
     @api.model
     def default_get(self, fields_list):

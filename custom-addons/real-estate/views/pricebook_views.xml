@@ -4,7 +4,9 @@
         <field name="name">real.estate.pricebook.list.view</field>
         <field name="model">real.estate.pricebook</field>
         <field name="arch" type="xml">
-            <list string="Pricebooks">
+            <list string="Bảng giá">
+                <field name="price_book_code"/>
+                <field name="name"/>
                 <field name="property_id"/>
                 <field name="payment_term_id"/>
                 <field name="status"/>
@@ -22,8 +24,16 @@
         <field name="name">real.estate.pricebook.form.view</field>
         <field name="model">real.estate.pricebook</field>
         <field name="arch" type="xml">
-            <form string="Pricebook">
+            <form string="Bảng giá">
                 <sheet>
+                    <div class="oe_title">
+                         <label for="name" string="Giữ chỗ"/>
+                         <h1>
+                            <field name="name" options="{'line_breaks': False}" widget="text" class="text-break" default_focus="1" placeholder="e.g. CH 001" required="true"/>
+                         </h1>
+                        <label for="price_book_code" string="Mã bảng giá"/>
+                         <field name="price_book_code" required="1"/>
+                     </div>
                     <group>
                         <field name="property_id" required="1"/>
                         <field name="payment_term_id" required="1"/>
@@ -34,7 +44,7 @@
                         <field name="end_date" required="1"/>
                         <field name="notes"/>
                     </group>
-                    <group string="Price Details">
+                    <group string="Chi tiết giá">
                         <field name="net_price" required="1"/>
                         <field name="vat_amount" readonly="1"/>
                         <field name="gross_amount" readonly="1"/>
@@ -48,7 +58,7 @@
 
     <!-- Action -->
     <record id="real_estate_pricebook_action" model="ir.actions.act_window">
-        <field name="name">Pricebooks</field>
+        <field name="name">Bảng giá</field>
         <field name="res_model">real.estate.pricebook</field>
         <field name="view_mode">list,form</field>
     </record>

@@ -67,17 +67,17 @@
         <field name="name">real.estate.property.form.view</field>
         <field name="model">real.estate.property</field>
         <field name="arch" type="xml">
-            <form string="Property">
+            <form string="Tài sản">
                 <sheet>
                    <field name="image" widget="image" class="oe_avatar" options="{'preview_image': 'image'}"/>
                      <div class="oe_title">
-                         <label for="property_name" string="Property"/>
+                         <label for="property_name" string="Tài sản"/>
                          <h1>
                             <field name="property_name" options="{'line_breaks': False}" widget="text" class="text-break" default_focus="1" placeholder="e.g. CH 001" required="true"/>
                          </h1>
                      </div>
                     <notebook>
-                        <page string="General Information" name="general_information">
+                        <page string="Thông tin tổng quan" name="general_information">
                              <group>
                                 <group name="group_general">
                                     <field name="status_id"/>
@@ -90,13 +90,15 @@
                                     <field name="property_value"/>
                                     <field name="usable_area"/>
                                     <field name="view"/>
+                                    <field name="width"/>
+                                    <field name="length"/>
                                 </group>
                             </group>
-                             <group name="internal_notes" string="Internal Notes">
+                             <group name="internal_notes" string="Ghi chú nội bộ">
                                 <field colspan="2" name="description" nolabel="1" placeholder="This note is only for internal purposes."/>
                              </group>
                         </page>
-                        <page string="Price Information" name="price_information">
+                        <page string="Thông tin giá bán" name="price_information">
                             <group name="price_information">
                                 <field name="unit_price_excl_vat"/>
                                 <field name="unit_price_incl_vat"/>
@@ -112,7 +114,7 @@
 
     <!-- Action -->
     <record id="real_estate_property_action" model="ir.actions.act_window">
-        <field name="name">Properties</field>
+        <field name="name">Tài sản</field>
         <field name="res_model">real.estate.property</field>
         <field name="view_mode">kanban,list,form</field>
     </record>

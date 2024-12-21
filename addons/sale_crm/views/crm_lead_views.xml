@@ -7,8 +7,8 @@
             <field name="inherit_id" ref="crm.crm_lead_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='action_set_won_rainbowman']" position="before">
-                    <button string="New Quotation" name="action_sale_quotations_new" type="object" class="oe_highlight" data-hotkey="q"
-                        title="Create new quotation"
+                    <button string="Đặt cọc" name="action_sale_quotations_new" type="object" class="oe_highlight" data-hotkey="q"
+                        title="Tạo mới Đặt cọc"
                         invisible="type == 'lead' or probability == 0 and not active"/>
                 </xpath>
                 <button name="action_set_won_rainbowman" position="attributes">
@@ -23,7 +23,7 @@
                         name="action_view_sale_order" icon="fa-usd">
                         <div class="o_field_widget o_stat_info">
                             <span class="o_stat_value"><field name="sale_amount_total" widget="monetary" options="{'currency_field': 'company_currency'}"/></span>
-                            <span class="o_stat_text"> Orders</span>
+                            <span class="o_stat_text"> Đặt Cọc</span>
                             <field name="sale_order_count" invisible="1"/>
                         </div>
                     </button>

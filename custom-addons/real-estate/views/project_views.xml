@@ -4,14 +4,14 @@
         <field name="name">real.estate.project.list.view</field>
         <field name="model">real.estate.project</field>
         <field name="arch" type="xml">
-            <list string="Projects">
+            <list string="Dự án">
                 <field name="project_code"/>
                 <field name="name"/>
                 <field name="status"/>
                 <field name="project_type"/>
                 <field name="estimated_handover_date"/>
                 <field name="apartment_area"/>
-                <field name="deposit_value"/>
+                <field name="value"/>
                 <field name="total_units"/>
                 <field name="location"/>
                 <field name="description"/>
@@ -24,23 +24,28 @@
         <field name="name">real.estate.project.form.view</field>
         <field name="model">real.estate.project</field>
         <field name="arch" type="xml">
-            <form string="Project">
+            <form string="Dự án">
                 <sheet>
+                    <label for="project_code" string=" Mã Dự án"/>
+                    <field name="project_code" string="Mã dự án" placeholder="Enter Project Code"/>
+                    <div class="oe_title">
+                         <label for="name" string="Dự án"/>
+                         <h1>
+                            <field name="name" options="{'line_breaks': False}" widget="text" class="text-break" default_focus="1" placeholder="e.g. CH 001" required="true"/>
+                         </h1>
+                     </div>
                     <group>
-                        <field name="project_code" string="Project Code" placeholder="Enter Project Code"/>
-                        <field name="name" string="Project Name" placeholder="Enter Project Name"/>
-                        <field name="status" string="Status" placeholder="Select Project Status"/>
-                        <field name="project_type" string="Project Type" placeholder="Select Project Type"/>
-                        <field name="deposit_value" string="Deposit Value" placeholder="Enter Deposit Value"/>
-                        <field name="estimated_handover_date" string="Handover Date"/>
-                        <field name="apartment_area" string="Apartment Area"/>
-                        <field name="total_units" string="Total Units"/>
-                        <field name="location" string="Enter Location"/>
-                        <field name="description" string="Enter Description"/>
+                        <field name="status" string="Trạng thái" placeholder="Select Project Status"/>
+                        <field name="project_type" string="Loại dự án" placeholder="Select Project Type"/>
+                        <field name="value" string="Giá trị dự án" placeholder="Enter Value"/>
+                        <field name="estimated_handover_date" string="Ngày bàn giao"/>
+                        <field name="apartment_area" string="Diện tích khu dân cư"/>
+                        <field name="total_units" string="Số lượng sản phẩm"/>
+                        <field name="location" string="Địa chỉ"/>
                     </group>
                     <group>
-                        <field name="apartment_area" string="Area (m²)" placeholder="Enter Area"/>
-                        <field name="description" string="Description" widget="text" placeholder="Enter Project Description"/>
+                        <field name="apartment_area" string="Tổng diện tích (m²)" placeholder="Enter Area"/>
+                        <field name="description" string="Mô tả" widget="text" placeholder="Enter Project Description"/>
                     </group>
                 </sheet>
             </form>
@@ -49,7 +54,7 @@
 
     <!-- Action -->
     <record id="real_estate_project_action" model="ir.actions.act_window">
-        <field name="name">Projects</field>
+        <field name="name">Dự án</field>
         <field name="res_model">real.estate.project</field>
         <field name="view_mode">list,form</field>
     </record>

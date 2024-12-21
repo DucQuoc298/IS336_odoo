@@ -5,54 +5,58 @@ from odoo.fields import Properties
 
 class RealEstateProperty(models.Model):
     _name = 'real.estate.property'
-    _description = 'Property'
+    _description = 'Tài sản'
     _order = "is_favorite desc"
+    _rec_name = 'property_name'
 
-    property = fields.Char('Property Code', required=True)
-    property_name = fields.Char(string="Property", required=True, help="Name of the real estate property", default="")
+    property = fields.Char('Mã tài sản', required=True)
+    property_name = fields.Char(string="Tên tài sản", required=True, help="Name of the real estate property", default="")
     status_code = fields.Char(
-        string="Status Code",
+        string="Mã trạng thái tài sản",
         required=True,
         help="The project associated with this building"
     )
     status_id = fields.Many2one(
         comodel_name='real.estate.property.status',
-        string="Status",
+        string="Trạng thái tài sản",
         compute='_compute_status',
         inverse="_inverse_status",
         store=True
     )
-    description = fields.Char(string="Description", help="Description of the property")
+    description = fields.Char(string="Mô tả", help="Description of the property")
     property_type = fields.Selection([
-        ('apartment', 'Apartment'),
-        ('land', 'Land'),
+        ('apartment', 'Khu dân cư'),
+        ('land', 'Đất'),
         ('villa', 'Villa'),
-        ('commercial', 'Commercial'),
-    ], string="Property Type",default='apartment', help="Type of the property")
-    building_code = fields.Char(string="Building Code", help="Building associated with the property")
+        ('commercial', 'Khu thương mại'),
+    ], string="Loại tài sản",default='apartment', help="Type of the property")
+    building_code = fields.Char(string="Mã toà nhà", help="Building associated with the property")
     building_id = fields.Many2one(
         comodel_name='real.estate.building',
-        string="Building",
+        string="Toà nhà",
         compute='_compute_building',
         inverse="_inverse_building",
         store=True
     )
     is_favorite = fields.Boolean(string="Favorite")
-    total_area = fields.Float(string="Total Area (m²)", help="Total area of the property in square meters")
-    property_value = fields.Float(string="Property Value", help="Total value of the property")
-    floor = fields.Char(string="Floor", help="Floor number for properties within a building")
-    usable_area = fields.Float(string="Usable Area (m²)", help="Net usable area of the property")
-    unit_price_excl_vat = fields.Float(string="Unit Price (Excl. VAT)", help="Unit price excluding VAT")
-    unit_price_incl_vat = fields.Float(string="Unit Price (Incl. VAT)", help="Unit price including VAT")
-    vat_taxable_value = fields.Float(string="VAT Taxable Value", help="Value used for VAT calculation")
-    land_use_right_value = fields.Float(string="Land Use Right Value", help="Value of the land use rights")
+    total_area = fields.Float(string="Tổng diện tích (m²)", help="Total area of the property in square meters")
+    property_value = fields.Float(string="Giá trị tài sản", help="Total value of the property")
+    floor = fields.Char(string="Tầng", help="Floor number for properties within a building")
+    usable_area = fields.Float(string="Diện tích có thể sử dụng (m²)", help="Net usable area of the property")
+    unit_price_excl_vat = fields.Float(string="Giá (không có VAT)", help="Unit price excluding VAT")
+    unit_price_incl_vat = fields.Float(string="Giá (Có VAT)", help="Unit price including VAT")
+    vat_taxable_value = fields.Float(string="Giá trị VAT", help="Value used for VAT calculation")
+    land_use_right_value = fields.Float(string="Giá trị sử dụng đất", help="Value of the land use rights")
     view = fields.Selection([
-        ('sea', 'Sea View'),
-        ('garden', 'Garden View'),
-        ('city', 'City View'),
-        ('mountain', 'Mountain View')
-    ], string="View", help="View type of the property")
-    image = fields.Binary(string="Property Image", attachment=True)
+        ('sea', 'Cảnh biển'),
+        ('garden', 'Cảnh vườn'),
+        ('city', 'Cảnh thành phố'),
+        ('mountain', 'Cảnh Đồi núi')
+    ], string="Phong cảnh", help="View type of the property")
+    width = fields.Float(string="Rộng", help="Width of the property")
+    length = fields.Float(string="Dài", help="Length of the property")
+    bedroom = fields.Float(string="Phòng ngủ", help="Bedroom of the property")
+    image = fields.Binary(string="Hình ảnh", attachment=True)
 
     @api.depends('status_code')
     def _compute_status(self):
@@ -86,7 +90,7 @@ class RealEstateProperty(models.Model):
             else:
                 record.building_code = False
 
-    @api.depends('property')
+    @api.depends('property_name')
     def _compute_display_name(self):
         for property in self:
             property.display_name =  property.property_name

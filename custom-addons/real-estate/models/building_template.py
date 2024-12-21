@@ -4,32 +4,32 @@ from odoo.exceptions import ValidationError
 
 class RealEstateBuilding(models.Model):
     _name = 'real.estate.building'
-    _description = 'Building'
+    _description = 'Toà nhà'
 
-    building_code = fields.Char(string="Building", required=True)
-    name = fields.Char(string="Name", required=True)
+    building_code = fields.Char(string="Toà nhà", required=True)
+    name = fields.Char(string="Tên", required=True)
     status = fields.Selection([
-        ('W', 'Working'),
-        ('C', 'Closed')
-    ], string="Status", default='W')
+        ('W', 'Đang hoạt động'),
+        ('C', 'Đã đóng')
+    ], string="Trạng thái", default='W')
     project_code = fields.Many2one(
         'real.estate.project',
-        string="Project Code",
+        string="Dự án",
         required=True,
         help="The project associated with this building"
     )
     project_id = fields.Many2one(
         'real.estate.project',
-         string="Project",
+         string="Dự án",
          # compute="_compute_project",
          store=True
     )
-    address = fields.Char(string="Address")
-    apartment_area = fields.Float(string="Apartment Area (m²)", help="Total apartment area in square meters")
-    commercial_area = fields.Float(string="Commercial Area (m²)", help="Total commercial area in square meters")
+    address = fields.Char(string="Địa chỉ")
+    apartment_area = fields.Float(string="Diện tích dân cư (m²)", help="Total apartment area in square meters")
+    commercial_area = fields.Float(string="Diện tích thương mại (m²)", help="Total commercial area in square meters")
 
-    total_units = fields.Integer(string="Total Units", help="Number of units in the building")
-    description = fields.Text(string="Description", help="Additional notes or description for the building")
+    total_units = fields.Integer(string="Số lượng sản phẩm", help="Number of units in the building")
+    description = fields.Text(string="Mô tả", help="Additional notes or description for the building")
 
     # @api.depends('project_code'
     # def _compute_project(self):

@@ -36,9 +36,16 @@ class CrmLead(models.Model):
             return self.action_new_quotation()
 
     def action_new_quotation(self):
-        action = self.env["ir.actions.actions"]._for_xml_id("sale_crm.sale_action_quotations_new")
-        action['context'] = self._prepare_opportunity_quotation_context()
-        action['context']['search_default_opportunity_id'] = self.id
+        action = self.env["ir.actions.actions"]._for_xml_id("real-estate.real_estate_booking_action")
+
+        # Đảm bảo rằng view hiển thị là form của Booking trong Real Estate
+        action['views'] = [(self.env.ref('real-estate.real_estate_booking_form').id, 'form')]
+
+        # Bạn có thể bổ sung context nếu cần thiết (ví dụ: truyền ID của lead hiện tại vào context)
+        action['context'] = {
+            'default_partner_id': self.partner_id.id,
+            'default_opportunity_id': self.id,
+        }
         return action
 
     def action_view_sale_quotation(self):

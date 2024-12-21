@@ -2,42 +2,43 @@
 
     <!-- Root Menu -->
     <menuitem id="real_estate_root_menu"
-              name="Real Estate">
+              name="Bất động sản">
 
-        <!-- Projects Submenu -->
+        <menuitem id="real_estate_order_menu"
+                  name="Đơn hàng">
+            <menuitem id="real_estate_booking_menu"
+                      name="Giữ chỗ"
+                      action="real_estate_booking_action"/>
+            <menuitem id="real_estate_deposit_menu"
+                      name="Đặt cọc"
+                      action="real_estate_deposit_action"/>
+        </menuitem>
+
         <menuitem id="real_estate_projects_menu"
-                  name="Project">
-            <menuitem id="real_estate_project_list_menu"
-                      name="Project"
-                      action="real_estate_project_action"/>
-        </menuitem>
+                  name="Dự án"
+                  action="real_estate_project_action"/>
 
-        <!-- Buildings Submenu -->
         <menuitem id="real_estate_buildings_menu"
-                  name="Building">
-            <menuitem id="real_estate_building_list_menu"
-                      name="Building"
-                      action="real_estate_building_action"/>
-        </menuitem>
+                  name="Toà nhà"
+                  action="real_estate_building_action"/>
+
 
         <!-- Properties Submenu -->
         <menuitem id="real_estate_properties_menu"
-                  name="Property">
-            <menuitem id="real_estate_property_list_menu"
-                      name="Property"
-                      action="real_estate_property_action"/>
-        </menuitem>
+                  name="Tài sản"
+                  action="real_estate_property_action"/>
+
         <menuitem id="menu_real_estate_config"
-            name="Configuration"
+            name="Cấu hình"
             sequence="50">
             <menuitem id="menu_property_config"
                 sequence="30"
-                name="Property">
+                name="Tài sản">
                 <menuitem id="menu_real_estate_property_statuses_config"
-                          name="Property Status"
+                          name="Trạng thái tài sản"
                           action="real_estate_property_status_action"/>
                 <menuitem id="menu_real_estate_pricebook_config"
-                          name="Pricebook"
+                          name="Bảng giá"
                           action="real_estate_pricebook_action"/>
             </menuitem>
 
